@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aviation Portfolio</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {}
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Extra micro-interactions to mimic framer-motion vibes */
+    .card-hover { transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+    .card-hover:hover { transform: translateY(-4px); }
+    .float-xy { animation: floatxy 2.4s ease-in-out infinite alternate; }
+    @keyframes floatxy { from { transform: translate(-12px,-12px); } to { transform: translate(0,0); } }
+    .fade-up { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+    .fade-up.revealed { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body class="min-h-screen bg-zinc-50 text-zinc-950 antialiased selection:bg-sky-200 selection:text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
+  <!-- Background -->
+  <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,theme(colors.sky.200/15),transparent_60%)] dark:bg-[radial-gradient(ellipse_at_top,theme(colors.sky.400/10),transparent_60%)]"></div>
+    <div class="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(to_right,theme(colors.zinc.400/40)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.zinc.400/40)_1px,transparent_1px)] [background-size:48px_48px] dark:opacity-[0.06]"></div>
+    <div class="absolute -top-1/2 left-1/2 h-[120vh] w-[120vw] -translate-x-1/2 rounded-full blur-3xl bg-gradient-to-tr from-sky-300/40 via-indigo-300/30 to-fuchsia-300/20 dark:from-sky-500/20 dark:via-indigo-500/20 dark:to-fuchsia-500/10"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/40 dark:supports-[backdrop-filter]:bg-zinc-950/30 border-b border-zinc-200/60 dark:border-zinc-800/60">
+    <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
+      <div class="flex items-center gap-2">
+        <i data-lucide="plane" class="h-5 w-5 text-sky-600 dark:text-sky-400"></i>
+        <span id="nav-name" class="font-semibold tracking-tight">Your Name</span>
+        <span class="hidden text-zinc-400 sm:inline">•</span>
+        <span id="nav-role" class="hidden text-zinc-500 dark:text-zinc-400 sm:inline">Aviation Student • Developer</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="#projects" class="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition">Projects</a>
+        <a href="#about" class="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition">About</a>
+        <a href="#contact" class="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition">Contact</a>
+        <button id="theme-toggle" class="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800">
+          <i data-lucide="sun" class="h-4 w-4" id="icon-sun"></i>
+          <i data-lucide="moon" class="h-4 w-4 hidden" id="icon-moon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="relative mx-auto max-w-6xl px-4 py-16 sm:py-24">
+    <div class="grid items-center gap-8 md:grid-cols-2">
+      <div>
+        <h1 class="fade-up text-4xl font-bold tracking-tight sm:text-5xl" id="hero-name">Your Name</h1>
+        <p class="fade-up mt-3 text-lg text-zinc-600 dark:text-zinc-300" style="transition-delay:.1s" id="hero-role">Aviation Student • Developer. Building things that fly—and the systems that make them smarter.</p>
+        <div class="fade-up mt-6 flex flex-wrap items-center gap-3" style="transition-delay:.15s">
+          <a id="resume-link" href="#" target="_blank" rel="noreferrer" class="group inline-flex items-center rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white">
+            Download Resume
+            <i data-lucide="arrow-right" class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5"></i>
+          </a>
+          <a id="email-link-1" href="mailto:you@example.com" class="inline-flex items-center rounded-md border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-900 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800">
+            <i data-lucide="mail" class="mr-2 h-4 w-4"></i>
+            Get in touch
+          </a>
+        </div>
+        <div class="mt-6 flex items-center gap-3 text-sm text-zinc-500 dark:text-zinc-400">
+          <i data-lucide="map-pin" class="h-4 w-4"></i>
+          <span id="location">Fairborn, OH</span>
+          <span>•</span>
+          <a id="email-link-2" href="mailto:you@example.com" class="underline-offset-2 hover:underline">you@example.com</a>
+        </div>
+        <div class="mt-4 flex items-center gap-4 text-zinc-600 dark:text-zinc-300">
+          <a id="github-link" class="hover:opacity-80 transition" href="#" target="_blank" rel="noreferrer" aria-label="GitHub">
+            <i data-lucide="github" class="h-5 w-5"></i>
+          </a>
+          <a id="linkedin-link" class="hover:opacity-80 transition" href="#" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+            <i data-lucide="linkedin" class="h-5 w-5"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Art block -->
+      <div class="fade-up relative aspect-[4/3] rounded-2xl border border-zinc-200/60 dark:border-zinc-800/60 bg-gradient-to-br from-white/60 to-white/30 dark:from-zinc-900/60 dark:to-zinc-900/20 p-6 overflow-hidden shadow-lg">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,theme(colors.sky.400/10),transparent_60%)]"></div>
+        <svg class="absolute inset-0 h-full w-full" viewBox="0 0 800 600" fill="none">
+          <path d="M50 500 C 200 420, 250 350, 340 300 C 430 250, 520 270, 720 140" stroke="currentColor" class="text-sky-500/50" stroke-width="2" stroke-dasharray="6 8" />
+        </svg>
+        <div class="relative z-10 flex h-full items-end justify-end">
+          <div class="inline-flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2 text-sm shadow-sm ring-1 ring-inset ring-zinc-900/5 dark:bg-zinc-900/70 dark:ring-white/10 float-xy">
+            <i data-lucide="plane" class="h-4 w-4 text-sky-600 dark:text-sky-400"></i>
+            <span>Cleared for takeoff</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="mx-auto max-w-6xl px-4 py-10 sm:py-16">
+    <div class="mb-6 flex items-end justify-between">
+      <div>
+        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Projects</h2>
+        <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">A mix of aviation, computer science, and other curiosities.</p>
+      </div>
+    </div>
+
+    <div id="tabs" class="w-full">
+      <div id="tabs-list" class="mb-6 flex flex-wrap gap-2"></div>
+      <div id="tabs-content"></div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:py-16">
+    <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Flight Path</h2>
+    <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">A quick logbook of milestones and roles.</p>
+    <div id="timeline" class="mt-6 space-y-6 border-l border-zinc-200 pl-6 dark:border-zinc-800"></div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="mx-auto max-w-6xl px-4 py-10 sm:py-16">
+    <div class="grid gap-8 md:grid-cols-2">
+      <div>
+        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">About</h2>
+        <p class="mt-2 text-zinc-700 dark:text-zinc-300">
+          I’m an aviation-focused builder who loves turning ideas into working systems. Whether it’s tuning a flight-control PID, crafting
+          a clean UI, or designing progression for complex games, I chase clarity, performance, and a little bit of flair.
+        </p>
+        <ul class="mt-4 space-y-2 text-sm text-zinc-600 dark:text-zinc-300">
+          <li>• Comfortable with TypeScript, Lua, and data modeling.</li>
+          <li>• Interested in autopilot design, human factors, and simulation.</li>
+          <li>• Enjoys collaborative projects and shipping polished experiences.</li>
+        </ul>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-zinc-200/60 bg-white/80 p-4 dark:border-zinc-800/60 dark:bg-zinc-900/70">
+          <div class="pb-2 font-semibold text-sm">Focus</div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-300">Aviation systems • Web apps • Game tooling</div>
+        </div>
+        <div class="rounded-xl border border-zinc-200/60 bg-white/80 p-4 dark:border-zinc-800/60 dark:bg-zinc-900/70">
+          <div class="pb-2 font-semibold text-sm">Stack</div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-300">TypeScript, React, Lua, GLua, Node, SQL basics</div>
+        </div>
+        <div class="rounded-xl border border-zinc-200/60 bg-white/80 p-4 dark:border-zinc-800/60 dark:bg-zinc-900/70">
+          <div class="pb-2 font-semibold text-sm">Certs (goal)</div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-300">PPL ➝ Instrument ➝ Commercial</div>
+        </div>
+        <div class="rounded-xl border border-zinc-200/60 bg-white/80 p-4 dark:border-zinc-800/60 dark:bg-zinc-900/70">
+          <div class="pb-2 font-semibold text-sm">Interests</div>
+          <div class="text-sm text-zinc-600 dark:text-zinc-300">Sim design, avionics UI, systems thinking</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="mx-auto max-w-6xl px-4 py-10 sm:py-16">
+    <div class="rounded-2xl border border-zinc-200/60 bg-white/70 p-8 backdrop-blur dark:border-zinc-800/60 dark:bg-zinc-900/60">
+      <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Let’s build something</h2>
+      <p class="mt-2 text-zinc-600 dark:text-zinc-300">
+        I’m open to internships, collaborations, and interesting side projects—especially around aviation or simulation.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a id="email-link-3" href="mailto:you@example.com" class="inline-flex items-center rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white">
+          <i data-lucide="mail" class="mr-2 h-4 w-4"></i> Email me
+        </a>
+        <a id="resume-link-2" href="#" target="_blank" rel="noreferrer" class="inline-flex items-center rounded-md border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-900 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800">Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mx-auto max-w-6xl px-4 py-8 text-sm text-zinc-500 dark:text-zinc-400">
+    <div class="flex items-center justify-between">
+      <span>© <span id="year"></span> <span id="footer-name">Your Name</span></span>
+      <span class="flex items-center gap-2">
+        <i data-lucide="plane" class="h-4 w-4"></i>
+        Smooth skies ahead
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // ====== CONFIG (replace with your details) ======
+    const RESUME_URL = '#';
+    const EMAIL = 'you@example.com';
+    const LOCATION = 'Fairborn, OH';
+    const YOUR_NAME = 'Your Name';
+    const ROLE = 'Aviation Student • Developer';
+    const SOCIALS = { github: '#', linkedin: '#' };
+
+    const projects = [
+      { id: 'autopilot-sim', title: 'Autopilot PID Simulator', blurb: 'A browser-based PID flight-control sandbox with trim, AOA, and wind gust models.', tags: ['aviation','typescript','pid','webgl'], links: { live: '#', repo: '#' }, icon: 'plane' },
+      { id: 'gmod-tardis', title: "Garry's Mod: TARDIS Room Teleporter", blurb: 'StarfallEX spellbook system with instant/charged/channeled spells and custom teleport logic.', tags: ['computer-science','lua','gmod','starfallex'], links: { live: '#', repo: '#' }, icon: 'rocket' },
+      { id: 'minecraft-rs-quests', title: 'Refined Storage Questline (FTB Quests)', blurb: 'An in-depth, progression-based questline focused on RS automation for modded MC 1.20.1.', tags: ['computer-science','design','minecraft'], links: { live: '#', repo: '#' }, icon: 'cpu' },
+      { id: 'stormworks-semi', title: 'Stormworks Efficient Semi Truck', blurb: 'Aerodynamic tuning, gearing, and fuel optimization for long-haul efficiency.', tags: ['misc','simulation','engineering'], links: { live: '#', repo: '#' }, icon: 'wrench' },
+      { id: 'subnautica-2-design', title: 'Subnautica 2 Narrative & Systems Pitch', blurb: 'Deep biomes, pressure/hallucination mechanics, and mantle-powered Architect emitter.', tags: ['misc','game-design','writing'], links: { live: '#', repo: '#' }, icon: 'database' },
+      { id: 'ftb-enderio-questline', title: 'Ender IO Tech Questline', blurb: 'Technology-focused quest progression with light adventure and balanced gating.', tags: ['computer-science','design','minecraft'], links: { live: '#', repo: '#' }, icon: 'code' },
+    ];
+
+    const categories = [
+      { key: 'all', label: 'All' },
+      { key: 'aviation', label: 'Aviation' },
+      { key: 'computer-science', label: 'Computer Science' },
+      { key: 'misc', label: 'Misc' },
+    ];
+
+    // ====== INIT CONTENT ======
+    document.getElementById('nav-name').textContent = YOUR_NAME;
+    document.getElementById('nav-role').textContent = ROLE;
+    document.getElementById('hero-name').textContent = YOUR_NAME;
+    document.getElementById('hero-role').textContent = ROLE + '. Building things that fly—and the systems that make them smarter.';
+    document.getElementById('location').textContent = LOCATION;
+    document.getElementById('email-link-1').href = 'mailto:' + EMAIL;
+    document.getElementById('email-link-2').href = 'mailto:' + EMAIL;
+    document.getElementById('email-link-2').textContent = EMAIL;
+    document.getElementById('email-link-3').href = 'mailto:' + EMAIL;
+    document.getElementById('resume-link').href = RESUME_URL;
+    document.getElementById('resume-link-2').href = RESUME_URL;
+    document.getElementById('github-link').href = SOCIALS.github;
+    document.getElementById('linkedin-link').href = SOCIALS.linkedin;
+    document.getElementById('footer-name').textContent = YOUR_NAME;
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ====== Tabs / Projects ======
+    const tabsList = document.getElementById('tabs-list');
+    const tabsContent = document.getElementById('tabs-content');
+    let currentTab = 'all';
+
+    function renderTabs() {
+      tabsList.innerHTML = '';
+      categories.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'capitalize px-3 py-1.5 text-sm rounded-md border border-transparent data-[active=true]:bg-zinc-900 data-[active=true]:text-white dark:data-[active=true]:bg-zinc-100 dark:data-[active=true]:text-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800';
+        btn.textContent = c.label;
+        btn.setAttribute('data-key', c.key);
+        btn.setAttribute('data-active', c.key === currentTab);
+        btn.addEventListener('click', () => { currentTab = c.key; renderTabs(); renderProjects(); });
+        tabsList.appendChild(btn);
+      });
+    }
+
+    function createBadge(text) {
+      const span = document.createElement('span');
+      span.className = 'inline-flex items-center rounded-md bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 capitalize';
+      span.textContent = text.replace('-', ' ');
+      return span;
+    }
+
+    function projectCard(p) {
+      const wrap = document.createElement('div');
+      wrap.className = 'card-hover';
+      const card = document.createElement('div');
+      card.className = 'group relative overflow-hidden rounded-2xl border border-zinc-200/60 bg-white/80 backdrop-blur dark:border-zinc-800/60 dark:bg-zinc-900/70';
+
+      const header = document.createElement('div');
+      header.className = 'p-4 pb-2';
+      const row = document.createElement('div');
+      row.className = 'flex items-center justify-between';
+      const title = document.createElement('div');
+      title.className = 'text-base font-semibold tracking-tight';
+      title.textContent = p.title;
+      const icon = document.createElement('i');
+      icon.setAttribute('data-lucide', p.icon || 'code');
+      icon.className = 'h-5 w-5 text-sky-600 opacity-80 transition group-hover:opacity-100 dark:text-sky-400';
+      row.appendChild(title); row.appendChild(icon);
+      header.appendChild(row);
+
+      const content = document.createElement('div');
+      content.className = 'p-4 pt-0';
+      const blurb = document.createElement('p');
+      blurb.className = 'min-h-[48px] text-sm text-zinc-600 dark:text-zinc-300';
+      blurb.textContent = p.blurb;
+      const tagWrap = document.createElement('div');
+      tagWrap.className = 'mt-3 flex flex-wrap gap-2';
+      p.tags.forEach(t => tagWrap.appendChild(createBadge(t)));
+      const links = document.createElement('div');
+      links.className = 'mt-4 flex gap-3';
+      if (p.links.live) {
+        const a = document.createElement('a');
+        a.href = p.links.live; a.target = '_blank'; a.rel='noreferrer';
+        a.className = 'inline-flex items-center text-sm font-medium text-sky-700 hover:underline dark:text-sky-400';
+        a.innerHTML = '<i data-lucide="external-link" class="mr-1 h-4 w-4"></i>Live';
+        links.appendChild(a);
+      }
+      if (p.links.repo) {
+        const a = document.createElement('a');
+        a.href = p.links.repo; a.target = '_blank'; a.rel='noreferrer';
+        a.className = 'inline-flex items-center text-sm font-medium text-zinc-800 hover:underline dark:text-zinc-200';
+        a.innerHTML = '<i data-lucide="github" class="mr-1 h-4 w-4"></i>Code';
+        links.appendChild(a);
+      }
+      content.appendChild(blurb); content.appendChild(tagWrap); content.appendChild(links);
+
+      const glow = document.createElement('div');
+      glow.className = 'pointer-events-none absolute inset-0 opacity-0 transition group-hover:opacity-100';
+      glow.innerHTML = '<div class="absolute -inset-8 -z-10 bg-gradient-to-tr from-sky-400/10 via-indigo-400/10 to-fuchsia-400/10 blur-2xl"></div>';
+
+      card.appendChild(header); card.appendChild(content); card.appendChild(glow);
+      wrap.appendChild(card);
+      return wrap;
+    }
+
+    function renderProjects() {
+      tabsContent.innerHTML = '';
+      const grid = document.createElement('div');
+      grid.className = 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3';
+      const items = currentTab === 'all' ? projects : projects.filter(p => p.tags.includes(currentTab));
+      items.forEach(p => grid.appendChild(projectCard(p)));
+      tabsContent.appendChild(grid);
+      lucide.createIcons();
+    }
+
+    renderTabs();
+    renderProjects();
+
+    // ====== Timeline ======
+    const timelineItems = [
+      { title: 'Aviation Sciences @ Wright State (in-progress)', detail: 'Coursework in aerodynamics, systems, and flight ops. Path toward PSA Airlines.' },
+      { title: 'Minecraft Director • CFC Servers', detail: 'Led a 1.12.2 modded server (200+ mods) with up to 20 concurrent players.' },
+      { title: 'GMod StarfallEX Library', detail: 'Custom spell system: Instant, Charged, Channeled, Passive.' },
+    ];
+
+    const tl = document.getElementById('timeline');
+    timelineItems.forEach((it, i) => {
+      const row = document.createElement('div');
+      row.className = 'relative fade-up';
+      row.style.transitionDelay = (i * 50) + 'ms';
+      row.innerHTML = `
+        <span class="absolute -left-[9px] mt-1 h-4 w-4 rounded-full bg-sky-500 ring-4 ring-white dark:ring-zinc-950"></span>
+        <h3 class="font-medium">${it.title}</h3>
+        <p class="text-sm text-zinc-600 dark:text-zinc-300">${it.detail}</p>`;
+      tl.appendChild(row);
+    });
+
+    // ====== Theme Toggle ======
+    const toggle = document.getElementById('theme-toggle');
+    const iconSun = document.getElementById('icon-sun');
+    const iconMoon = document.getElementById('icon-moon');
+    function syncIcons() {
+      const dark = document.documentElement.classList.contains('dark');
+      iconSun.classList.toggle('hidden', !dark);
+      iconMoon.classList.toggle('hidden', dark);
+    }
+    toggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      syncIcons();
+    });
+    syncIcons();
+
+    // ====== Reveal on view ======
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+    // Render icons at end
+    lucide.createIcons();
+  </script>
+</body>
+</html>
