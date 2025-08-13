@@ -196,12 +196,7 @@
     const SOCIALS = { github: 'https://github.com/avery-miller', linkedin: 'https://www.linkedin.com/in/avery-miller-a79b43342/' };
 
     const projects = [
-      { id: 'autopilot-sim', title: 'Autopilot PID Simulator', blurb: 'A browser-based PID flight-control sandbox with trim, AOA, and wind gust models.', tags: ['aviation','typescript','pid','webgl'], links: { live: '#', repo: '#' }, icon: 'plane' },
-      { id: 'gmod-tardis', title: "Garry's Mod: TARDIS Room Teleporter", blurb: 'StarfallEX spellbook system with instant/charged/channeled spells and custom teleport logic.', tags: ['computer-science','lua','gmod','starfallex'], links: { live: '#', repo: '#' }, icon: 'rocket' },
-      { id: 'minecraft-rs-quests', title: 'Refined Storage Questline (FTB Quests)', blurb: 'An in-depth, progression-based questline focused on RS automation for modded MC 1.20.1.', tags: ['computer-science','design','minecraft'], links: { live: '#', repo: '#' }, icon: 'cpu' },
-      { id: 'stormworks-semi', title: 'Stormworks Efficient Semi Truck', blurb: 'Aerodynamic tuning, gearing, and fuel optimization for long-haul efficiency.', tags: ['misc','simulation','engineering'], links: { live: '#', repo: '#' }, icon: 'wrench' },
-      { id: 'subnautica-2-design', title: 'Subnautica 2 Narrative & Systems Pitch', blurb: 'Deep biomes, pressure/hallucination mechanics, and mantle-powered Architect emitter.', tags: ['misc','game-design','writing'], links: { live: '#', repo: '#' }, icon: 'database' },
-      { id: 'ftb-enderio-questline', title: 'Ender IO Tech Questline', blurb: 'Technology-focused quest progression with light adventure and balanced gating.', tags: ['computer-science','design','minecraft'], links: { live: '#', repo: '#' }, icon: 'code' },
+      { id: 'sids-stars', title: 'KMGY Approach & Departure / SIDs & STARs', blurb: 'I designed approach & departure plates / SIDs and STARs that align with the Wright Brothers Airport / First Flight Aviation routes and waypoints.', tags: ['aviation'], links: { live: '#', repo: '#' }, icon: 'plane' },
     ];
 
     const categories = [
@@ -322,9 +317,7 @@
 
     // ====== Timeline ======
     const timelineItems = [
-      { title: 'Aviation Sciences @ Wright State (in-progress)', detail: 'Coursework in aerodynamics, systems, and flight ops. Path toward PSA Airlines.' },
-      { title: 'Minecraft Director • CFC Servers', detail: 'Led a 1.12.2 modded server (200+ mods) with up to 20 concurrent players.' },
-      { title: 'GMod StarfallEX Library', detail: 'Custom spell system: Instant, Charged, Channeled, Passive.' },
+      { title: 'Highschool Student @ Dayton Regional STEM School', detail: 'Coursework focusing on computer science and CCP Aviation.' },
     ];
 
     const tl = document.getElementById('timeline');
@@ -333,7 +326,6 @@
       row.className = 'relative fade-up';
       row.style.transitionDelay = (i * 50) + 'ms';
       row.innerHTML = `
-        <span class="absolute -left-[9px] mt-1 h-4 w-4 rounded-full bg-sky-500 ring-4 ring-white dark:ring-zinc-950"></span>
         <h3 class="font-medium">${it.title}</h3>
         <p class="text-sm text-zinc-600 dark:text-zinc-300">${it.detail}</p>`;
       tl.appendChild(row);
