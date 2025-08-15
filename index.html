@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Aviation Portfolio</title>
+        <title>Avery Miller's Portfolio</title>
+        <link rel="icon" type="image/x-icon" href="plane_favicon.ico">
         <!-- Tailwind CDN -->
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
@@ -51,7 +52,7 @@
                     <span class="hidden text-zinc-400 sm:inline">•</span>
                     <span id="nav-role"
                         class="hidden text-zinc-500 dark:text-zinc-400 sm:inline">Highschool
-                        Student • Aspiring Aviator • Musician</span>
+                        Student • Aspiring Aviator • Musician<br></span>
                 </div>
                 <div class="flex items-center gap-2">
                     <a href="#projects"
@@ -301,7 +302,7 @@
     document.getElementById('nav-name').textContent = YOUR_NAME;
     document.getElementById('nav-role').textContent = ROLE;
     document.getElementById('hero-name').textContent = YOUR_NAME;
-    document.getElementById('hero-role').textContent = ROLE + '. Flight decks, code stacks, soundtracks. Preparing for a career in aviation, developing coding side projects, and composing & playing original rock and psychedelic rock tracks.';
+    document.getElementById('hero-role').innerHTML = ROLE + '<br> Flight decks, code stacks, soundtracks. Preparing for a career in aviation, developing coding side projects, and composing & playing original rock and psychedelic rock tracks.';
     document.getElementById('location').textContent = LOCATION;
     document.getElementById('email-link-1').href = 'mailto:' + EMAIL;
     document.getElementById('email-link-2').href = 'mailto:' + EMAIL;
